@@ -8,7 +8,7 @@ export const connectToDatabase = async () => {
   // await mongoose.connect(
   //   'mongodb+srv://nodejs:Mahmoud123@cluster0.yzgiwmo.mongodb.net/myDB?retryWrites=true&w=majority'
   // );
-  await mongoose.connect(process.env.MONGODB_URI,)
+  await mongoose.connect(process.env.MONGO_URI,)
 
   console.log('Connected to the database!');
 };
