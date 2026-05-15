@@ -27,6 +27,7 @@ await apollo.start();
 const app = express();
 
 const getUserFormatRequest = async (req, models) => {
+  console.log("AUTH HEADER:", req.headers.authorization);
   const tokenWithBearer = req.headers.authorization || '';
 
   try {
@@ -59,15 +60,11 @@ app.use(
   express.json(),
 
   expressMiddleware(apollo, {
-    context: async ({ req }) => {
-      const user = await getUserFormatRequest(
-        req,
-        model
-      );
-
-      return user;
-    },
-  })
+  context: async ({ req }) => {
+    const user = await getUserFormatRequest(req, model);
+    return { user };
+  },
+})
 );
 
 app.listen(port, () => {
